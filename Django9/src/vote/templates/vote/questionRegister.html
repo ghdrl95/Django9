@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+질문 글 등록
+{% endblock %}
+{% block content %}
+	<!-- action 속성에 아무 값도 입력안할 경우 현재페이지로 재 요청  
+	127.0.0.1:8000/vote/questionRegister URL로 현재페이지를 받은경우
+	form 제출 시 127.0.0.1:8000/vote/questionRegister 주소로 데이터 전송-->
+	<form action="" method = "POST">
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="질문글 쓰기"/>
+	</form>
+{% endblock %}
+
+

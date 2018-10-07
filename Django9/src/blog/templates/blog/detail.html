@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+	나만의 블로그 - {{ obj.headline }}
+{% endblock %}
+{% block content %}
+	<table width="100%">
+		<tr>
+			<th> 제목</th>
+			<th> {{ obj.headline }} </th>
+		</tr>
+		<tr>
+			<th> 글쓴이/작성일 </th>
+			<th> {{ obj.author }}/{{ obj.pub_date }}</th>
+		</tr>
+		<tr>
+			<th colspan="2">
+				{# 해당 Post 객체와 연결된 PostImage, PostFile 객체를 출력 #}
+				{% for i in obj.postimage_set.all %}
+					<img src="{{ i.image.url }}" width=30%>
+				{% endfor %}
+				
+				{% for f in obj.postfile_set.all %}
+					<a href="{{ f.file.url }}" download>다운로드</a>
+				{% endfor %}
+				<pre> {{ obj.content }} </pre>
+			</th>
+		</tr>
+	</table>
+	{# disqus 사이트의 댓글 연동 #}
+	{% load disqus_tags %}
+	{% disqus_show_comments %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

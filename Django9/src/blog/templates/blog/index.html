@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title%}
+나만의 블로그
+{% endblock %}
+
+{% block content %}
+{# 다음페이지, 이전페이지가 존재하는 경우 링크를 출력 #}
+{% if page_obj.has_previous %}
+	<a href="?page={{page_obj.previous_page_number}}">이전페이지</a>
+{% endif %}
+
+{% if page_obj.has_next %}
+	<a href="?page={{page_obj.next_page_number}}">다음페이지</a>
+{% endif %}
+<table style="width:100%">
+	<tr>
+		<th> 글번호 </th>
+		<th> 제목 </th>
+		<th> 작성자 </th>
+		<th> 작성일 </th>
+	</tr>
+	{% for post in post_list %}
+		<tr>
+			<th>{{ post.id }}</th>
+			<th>
+				<a href="{% url 'blog:detail' post.id %}"> {{ post.headline }} </a> 
+			</th>
+			<th>{{ post.author }}</th>
+			<th>{{ post.pub_date }}</th>
+		</tr>
+	{% endfor %}
+</table>
+{# 로그인 여부에 따라 보여질 링크 #}
+{% if user.is_authenticated %}
+<a href="{% url 'blog:registerP' %}">글쓰기</a>
+{% endif %}
+
+<!-- 검색창 -->
+<br>
+<form action="{% url 'blog:search' %}" method="GET">
+	{% csrf_token %}
+	<input type="text" name='query'>
+	<input type='submit' value='검색'>
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

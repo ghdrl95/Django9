@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+	{# 뷰에서 북마크 객체를 obj 변수에 넣어 전달 #}
+	<h1>북마크 객체 상세페이지</h1>
+	<ul>
+		<li>ID : {{obj.id}}</li>
+		<li>bookname : {{obj.bookname}}</li>
+		<li>bookurl : {{obj.bookurl}}</li>
+	</ul>
+{%endblock %}

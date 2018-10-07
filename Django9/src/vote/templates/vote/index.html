@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+설문조사 페이지
+{% endblock %}
+{% block content %}
+	<h1>설문 리스트</h1>
+	<ul>
+		{% for question in question_list   %}
+		<li>
+		
+		<a href="{% url 'vote:detail' question.id %}">
+		{{ question.name }} / {{question.pub_date}} 
+		</a> 
+		<a href="{% url 'vote:questionUpdate' question.id %}">수정하기</a>
+		<a href="{% url 'vote:questionDelete' question.id %}">삭제하기</a>
+		</li>
+		{% endfor %}
+	</ul>
+	
+	<a href="{% url 'vote:questionResiger' %}">글 등록하기</a>
+	<br>
+	<a href="{% url 'vote:choiceRegister' %}">답변 등록하기</a>
+	<!-- 댓글 작성 폼 -->
+	{% if user.is_authenticated %}
+		<form action="" method="POST">
+			{% csrf_token %}
+			
+			<input type="text" maxlength="500" name="comment"/>
+			
+			<input type="submit" value="댓글 작성">
+		</form>
+	{% endif %}
+	<!-- 댓글 리스트  -->
+	<table width="100%">
+		<tr>
+			<th> ID </th>
+			<th> 내용 </th>
+			<th> 생성일 </th>
+		</tr>
+		{% for com in comment_list %}
+			<tr>
+				<td>{{com.user.username}}</td>
+				<td>{{com.comment}}</td>
+				<td>{{com.pub_date}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

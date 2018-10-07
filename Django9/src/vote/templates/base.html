@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+{% block title %}
+{% endblock %}
+</title>
+
+</head>
+<body>
+<h1>Django Homepage</h1>
+{% if user.is_authenticated %}
+{{user.username}}님 환영합니다!
+<a href="{% url 'auth:signout' %}">로그아웃</a>
+{% else %}
+<a href="{% url 'auth:signin' %}">로그인</a>
+<a href="{% url 'auth:signup' %}">회원가입</a>
+{% endif %}
+<br>
+<a href="{% url 'index' %}">북마크 어플리케이션</a>
+<a href="{% url 'vote:index' %}">투표 어플리케이션</a>
+<a href="{% url 'blog:index' %}">블로그 어플리케이션</a>
+<hr>
+{% block content %}
+{% endblock %}
+<hr>
+<p>010-1234-5678</p>
+<p>서울특별시 노원구 </p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+	<h1>{{question.name}}의 투표결과</h1>
+	<table>
+		<tr>
+			<th>답변 항목</th>
+			<th>투표 수</th>			
+		</tr>
+	{% for c in question.choice_set.all %}
+		<tr>
+			<td>{{c.name}}</td>
+			<td>{{c.vote}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<!-- 메인페이지 링크 생성하기 ~6:15-->
+	<a href="{% url 'vote:index' %}">메인페이지로 돌아가기</a> 
+	
+{% endblock %}

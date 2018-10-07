@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+	<h1>BookMark 객체 출력</h1>
+	<table>
+		<tr>
+			<th> id </th>
+			<th> bookname </th>
+			<th> bookurl </th>
+		</tr>
+		{# 뷰에서 넘겨받은 list 변수를 이용해 반복문 돌리기 #}
+		{% for obj in list %}
+		{# 반복문 안에서 객체를 가지고있는 변수 : obj #}
+		{# obj 변수는 BookMark 모델클래스 객체 이므로 .(점)연산자로 객체 안에 있는 변수를 사용#}
+		<tr>
+			<td> <a href="{% url 'bookdetail' obj.id %}">{{ obj.id }}</a> </td>
+			<td> <a href="{{obj.bookurl}}">{{ obj.bookname }}</a>   </td>
+			<td>{{ obj.bookurl }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<a href="{% url 'index' %}">메인페이지로 가기</a>
+{% endblock %}

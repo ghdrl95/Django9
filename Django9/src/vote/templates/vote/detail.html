@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+{{question.name}} 설문조사
+{% endblock %}
+{% block content %}
+
+	<h1>{{question.name}}</h1>
+	{# url 별칭  : 해당 별칭을 가진 url을 찾아서 매칭 해줌  #}
+	<form action="{% url 'vote:vote' %}" method ="POST">
+	{# csrf_token : csrf 공격을 막기 위해서 사용하는 일회용 키 #}
+		{% csrf_token %}
+		<!-- Question 객체에 연결되있는 Choice 객체들을 추출및라디오 버튼 생성 -->
+		<!-- 탬플릿 엔진에서는 함수호출시 인자값을 넣을수 없음
+		=> 함수호출을 변수사용하듯이 사용함 (소괄호 사용 불가) -->
+		<!-- 모델객체.연결된모델_set : 해당 모델객체와 연결된 다른 모델객체들을
+		대상으로 all(), get()함수를 사용하는 것. 해당 모델클래스를 다른모델클래스가
+		외래키로 연결이 되있는 상태만 사용가능 -->
+		{% for cho in question.choice_set.all  %}
+			<input type="radio" name="select" value="{{cho.id}}" 
+			       id="a{{forloop.counter}}" >  
+			<label for = "a{{forloop.counter}}">{{cho.name}}</label>
+			<a href="{% url 'vote:choiceDelete' cho.id %}">삭제하기</a>
+			<a href="{% url 'vote:choiceUpdate' cho.id %}">수정하기</a>
+			<br>
+			  
+		{% endfor %}
+		<input type="submit" value="투표">
+	</form>
+{%endblock%}
+
+
+
+
+
+
+
+
+
+

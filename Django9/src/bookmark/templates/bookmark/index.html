@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+북마크 어플리케이션
+{% endblock %}
+{% block content %}
+	<h1>장고 북마크 어플리케이션</h1>
+	<p>메인페이지입니다</p>
+	{# 파이썬 코드 주석 #}
+	<p>뷰 함수에서 전달받은 hello 변수 값 출력 : {{ hello }}</p>
+	<ol>
+	{% for i in list  %}
+		<li> {{ i }} </li>
+	{% endfor %}
+	</ol>
+	<a href="{% url 'booklist' %}">북마크 리스트 페이지로 가기</a>
+	<a href="{% url 'vote:index'%}">투표 어플리케이션으로 가기</a>
+{% endblock %}
+
+
+
+
+
+
+
